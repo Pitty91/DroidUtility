@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -24,167 +22,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
- * Created by PRATIK on 02-Jun-16.
+ * Created by PRATIK on 06-Jun-16.
  */
-public class Validator {
-
-    /**
-     * USER NAME VALIDATION
-     *
-     * @param context  activity
-     * @param username String
-     * @param length   int
-     * @return boolean
-     */
-    public static boolean isValidUserName(Context context, String username, int length) {
-
-        if (username.trim().length() >= length) {
-            //VALID USER NAME
-            return true;
-        } else {
-            Toast.makeText(context, "User name should be " + length + " character", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-    /**
-     * PASSWORD VALIDATION
-     *
-     * @param context  activity
-     * @param password String
-     * @param length   int
-     * @return boolean
-     */
-    public static boolean isValidPassword(Context context, String password, int length) {
-
-        if (password.trim().length() >= length) {
-            //VALID PASSWORD
-            return true;
-        } else {
-            Toast.makeText(context, "Password should be " + length + " character", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-    /**
-     * PASSWORD VALIDATION
-     *
-     * @param context       activity
-     * @param password      String
-     * @param length        int
-     * @param isSpecialchar boolean is special character allowed
-     * @param isNumber      boolean is number allowed
-     * @return boolean
-     */
-    public static boolean isValidPassword(Context context, String password, int length, boolean isSpecialchar, boolean isNumber) {
-
-        if (password.trim().length() >= length) {
-            //LENGTH IS GOOD
-            Pattern p = Pattern.compile("(?=.*[A-Za-z])");
-            Matcher m = p.matcher(password.trim());
-            //VALIDATE PASSWORD CONTAINS SPECIAL CHARACTER
-            if (m.find()) {
-                if (isSpecialchar) {
-                    Pattern p1 = Pattern.compile("(?=.*[!@#$%&*_])");
-                    Matcher m1 = p1.matcher(password.trim());
-                    if (m1.find()) {
-                        //VALIDATE PASSWORD CONTAINS NUMBER
-                        if (isNumber) {
-                            Pattern p2 = Pattern.compile("(?=.*\\d)");
-                            Matcher m2 = p2.matcher(password.trim());
-                            if (m2.find())
-                                return true;
-                            else {
-                                Toast.makeText(context, "Password must contain atleast 1 number", Toast.LENGTH_LONG).show();
-                                return false;
-                            }
-                        } else {
-                            return true;
-                        }
-                    } else {
-                        Toast.makeText(context, "Password must contain atleast 1 special character", Toast.LENGTH_LONG).show();
-                        return false;
-                    }
-                } else {
-                    if (isNumber) {
-                        Pattern p2 = Pattern.compile("(?=.*\\d)");
-                        Matcher m2 = p2.matcher(password.trim());
-                        if (m2.find())
-                            return true;
-                        else {
-                            Toast.makeText(context, "Password must contain atleast 1 number", Toast.LENGTH_LONG).show();
-                            return true;
-                        }
-                    } else {
-                        return true;
-                    }
-                }
-            } else {
-                Toast.makeText(context, "Password must contain atleast 1 alphabet", Toast.LENGTH_LONG).show();
-                return false;
-            }
-        } else {
-            Toast.makeText(context, "Password should be " + length + " character", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-    /**
-     * CHECK EMAIL IS VALID OR NOT
-     *
-     * @param context       activity
-     * @param email_address String
-     * @return boolean
-     */
-    public static boolean isValidEmail(Context context, String email_address) {
-
-        Pattern EMAIL_ADDRESS_PATTERN = Pattern
-                .compile("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        if (EMAIL_ADDRESS_PATTERN.matcher(email_address.trim()).matches()) {
-            return true;
-        } else {
-            Toast.makeText(context, "Invalid email address", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-    /**
-     * CHECK MOBILE IS VALID OR NOT
-     *
-     * @param context       activity
-     * @param mobile_number String
-     * @return boolean
-     */
-    public static boolean isValidMobile_no(Context context, String mobile_number) {
-        Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("^([1-9]{1})*([0-9]{9})$");
-        if (EMAIL_ADDRESS_PATTERN.matcher(mobile_number.trim()).matches()) {
-            return true;
-        } else {
-            Toast.makeText(context, "Invalid Mobile Number", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
-
-    /**
-     * CHACK DATE IS VALID OR NOT
-     *
-     * @param context activity
-     * @param date    String
-     * @return boolean
-     */
-    public static boolean isValidDate(Context context, String date) {
-        Pattern DATE_PATTERN = Pattern.compile("^([0-9]{2})*-([A-Z,a-z]{3})*-([0-9]{4})$");
-        if (DATE_PATTERN.matcher(date).matches()) {
-            return true;
-        } else {
-            Toast.makeText(context, "Invalid date", Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }
+public class Utility {
 
     /**
      * CHECK INTERNET IS AVAILABLE
@@ -283,14 +125,12 @@ public class Validator {
     /**
      * CHANGE DATE TIME FORMAT
      *
-     * @param dateTime
-     * @param fromFormat
-     * @param toFormat
-     * @return
+     * @param dateTime   String for date time
+     * @param fromFormat String date formate
+     * @param toFormat   String target formate
+     * @return String date formate
      */
-    public static String changeDateTimeFormat(@NonNull String dateTime,
-                                              @NonNull String fromFormat,
-                                              @NonNull String toFormat) {
+    public static String changeDateTimeFormat(String dateTime, String fromFormat, String toFormat) {
         try {
             SimpleDateFormat sdfFrom = new SimpleDateFormat(fromFormat, Locale.getDefault());
             Date date = sdfFrom.parse(dateTime);
@@ -305,7 +145,7 @@ public class Validator {
     /**
      * GET CURRENT DATE
      *
-     * @return
+     * @return String date
      */
     public static String getCurrentDate() {
         Calendar c = Calendar.getInstance();
@@ -331,7 +171,7 @@ public class Validator {
     /**
      * GET DEVICE NAME DETAILS
      *
-     * @return
+     * @return String date
      */
     public static String getDeviceName() {
         String manufacturer = Build.MANUFACTURER;
@@ -346,8 +186,8 @@ public class Validator {
     /**
      * CAPITALIZE STRING
      *
-     * @param s
-     * @return
+     * @param s String
+     * @return String
      */
     private static String capitalize(String s) {
         if (s == null || s.length() == 0) {
@@ -362,24 +202,12 @@ public class Validator {
     }
 
     /**
-     * Returns true if the string is null or 0-length.<br />
-     * <br />
-     * Created By <b><a href="http://about.me/bhattpratik">Pratik Bhatt</a></b>
-     *
-     * @param str the string to be examined
-     * @return true if str is null or zero length
-     */
-    public static boolean isNull(String str) {
-        return str == null || str.equalsIgnoreCase("null") || str.trim().length() == 0;
-    }
-
-    /**
      * SHOW DIALOGE ALERT
      *
-     * @param context
-     * @param resId
+     * @param context activity
+     * @param resId   intiger
      */
-    public static void showAlert(@NonNull Context context, @StringRes int resId) {
+    public static void showAlert(Context context, int resId) {
         android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(context);
         alertDialog.setMessage(resId);
         alertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -396,8 +224,8 @@ public class Validator {
     /**
      * IS NETWORK AVAILABLE OR NOT
      *
-     * @param context
-     * @return
+     * @param context activity
+     * @return boolean
      */
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -408,8 +236,8 @@ public class Validator {
     /**
      * PING FUNCTION TO CHECK INTERNET SPEED
      *
-     * @param u
-     * @return
+     * @param u String
+     * @return boolean
      */
     public static boolean ping(final String u) {
         try {

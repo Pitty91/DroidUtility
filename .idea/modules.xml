@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DroidUtils.iml" filepath="$PROJECT_DIR$/DroidUtils.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/pratik.com.droidutils/pratik.com.droidutils.iml" filepath="$PROJECT_DIR$/pratik.com.droidutils/pratik.com.droidutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/droidutils/pratik.com.droidutils.iml" filepath="$PROJECT_DIR$/droidutils/pratik.com.droidutils.iml" />
     </modules>
   </component>
 </project>

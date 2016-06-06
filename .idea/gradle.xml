@@ -10,14 +10,14 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/pratik.com.droidutils" />
+            <option value="$PROJECT_DIR$/droidutils" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/pratik.com.droidutils" />
+            <option value="$PROJECT_DIR$/droidutils" />
           </set>
         </option>
       </GradleProjectSettings>
